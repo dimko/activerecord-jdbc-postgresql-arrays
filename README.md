@@ -1,48 +1,59 @@
-PostgresArrays
-==============
+## ActiveRecord JDBC PostgreSQL Arrays
 
 This library adds ability to use PostgreSQL array types with ActiveRecord.
 
-    > User.find(:all, :conditions=>['arr @> ?', [1,2,3].pg])
-      SELECT * FROM "users" WHERE ('arr' @> E'{"1", "2", "3"}')
-    > User.find(:all, :conditions=>['arr @> ?', [1,2,3].pg(:integer)])
-      SELECT * FROM "users" WHERE (arr @> '{1,2,3}')
-    > User.find(:all, :conditions=>['arr @> ?', [1,2,3].pg(:float)])
-      SELECT * FROM "users" WHERE (arr @> '{1.0,2.0,3.0}')
-    > u = User.find(1)
-      SELECT * FROM "users" WHERE ("users"."id" = 1)
-      => #<User id: 1, ..., arr: [1,2]>
-    > u.arr = [3,4]
-    > u.save
-      UPDATE "users" SET "db_ar" = '{3.0,4.0}' WHERE "id" = 19
-    > User.find(:all, :conditions=>{:arr=>[3,4].pg})
-      SELECT * FROM "users" WHERE ("users"."arr" = E'{"3", "4"}')
-    > User.find(:all, :conditions=>{:arr=>[3,4].search_any(:float)})
-      SELECT * FROM "users" WHERE ("users"."arr" && '{3.0,4.0}')
-    > User.find(:all, :conditions=>{:arr=>[3,4].search_all(:integer)})
-      SELECT * FROM "users" WHERE ("users"."arr" @> '{3,4}')
-    > User.find(:all, :conditions=>{:arr=>[3,4].search_subarray(:safe)})
-      SELECT * FROM "users" WHERE ("users"."arr" <@ '{3,4}')
+### Queries
 
-      class U < ActiveRecord::Migration
-        def self.up
-          create_table :users do |t|
-            t.integer_array :int_ar
-          end
-          add_column :users, :fl_ar, :float_array
-        end
-      end
+```ruby
+User.find(:all, :conditions => ['arr @> ?', [1,2,3].pg])
+#  SELECT * FROM "users" WHERE ('arr' @> E'{"1", "2", "3"}')
+User.find(:all, :conditions => ['arr @> ?', [1,2,3].pg(:integer)])
+#  SELECT * FROM "users" WHERE (arr @> '{1,2,3}')
+User.find(:all, :conditions => ['arr @> ?', [1,2,3].pg(:float)])
+#  SELECT * FROM "users" WHERE (arr @> '{1.0,2.0,3.0}')
+u = User.find(1)
+#  SELECT * FROM "users" WHERE ("users"."id" = 1)
+#=> #<User id: 1, ..., arr: [1,2]>
+u.arr = [3,4]
+u.save
+#  UPDATE "users" SET "db_ar" = '{3.0,4.0}' WHERE "id" = 19
+User.find(:all, :conditions => { :arr => [3,4].pg })
+#  SELECT * FROM "users" WHERE ("users"."arr" = E'{"3", "4"}')
+User.find(:all, :conditions => { :arr => [3,4].search_any(:float) })
+#  SELECT * FROM "users" WHERE ("users"."arr" && '{3.0,4.0}')
+User.find(:all, :conditions => { :arr => [3,4].search_all(:integer) })
+#  SELECT * FROM "users" WHERE ("users"."arr" @> '{3,4}')
+User.find(:all, :conditions => { :arr => [3,4].search_subarray(:safe) })
+#  SELECT * FROM "users" WHERE ("users"."arr" <@ '{3,4}')
+```
 
-Installation
-============
+### Migrations
 
-    gem install ar_jdbc_pg_array
+```ruby
+class CreateUsers < ActiveRecord::Migration
+  def self.up
+    create_table :users do |t|
+      t.integer_array :int_ar
+    end
+    add_column :users, :fl_ar, :float_array
+  end
+end
+```
 
-Changelog
-=========
+### Installation
 
-  0.1.0
+Add this line to your application's Gemfile:
 
-    Initial jdbc support
+    gem 'ar_jdbc_pg_array'
 
-Copyright (c) 2010 Sokolov Yura aka funny_falcon, released under the MIT license
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install ar_jdbc_pg_array
+
+### Credits
+
+Copyright (c) 2010-2013 Sokolov Yura aka funny_falcon, released under the MIT license.
