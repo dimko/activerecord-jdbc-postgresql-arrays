@@ -1,6 +1,6 @@
+*.lock
 *.swo
 *.swp
-*gem*
 rdoc
 pkg
 *~

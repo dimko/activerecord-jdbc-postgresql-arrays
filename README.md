@@ -23,7 +23,7 @@ This library adds ability to use PostgreSQL array types with ActiveRecord.
       SELECT * FROM "users" WHERE ("users"."arr" @> '{3,4}')
     > User.find(:all, :conditions=>{:arr=>[3,4].search_subarray(:safe)})
       SELECT * FROM "users" WHERE ("users"."arr" <@ '{3,4}')
-      
+
       class U < ActiveRecord::Migration
         def self.up
           create_table :users do |t|
@@ -32,19 +32,17 @@ This library adds ability to use PostgreSQL array types with ActiveRecord.
           add_column :users, :fl_ar, :float_array
         end
       end
-      
+
 Installation
 ============
 
-    gem install ar_pg_array
+    gem install ar_jdbc_pg_array
 
 Changelog
 =========
 
-  0.9.13
+  0.1.0
 
-    Since version 0.9.13 ar_pg_array will try to detect arrays changed inplace.
-    And parsed arrays are now cached in @attributes_cache.
-    Thanks to Romain Beauxis (https://github.com/toots ) for being insistent about this.
+    Initial jdbc support
 
 Copyright (c) 2010 Sokolov Yura aka funny_falcon, released under the MIT license

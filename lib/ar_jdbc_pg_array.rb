@@ -1,0 +1,12 @@
+require 'active_record'
+require 'active_record/base'
+require 'active_record/connection_adapters/abstract_adapter'
+require 'arjdbc/postgresql'
+
+require 'ar_jdbc_pg_array/schema'
+require 'ar_jdbc_pg_array/schema_cacheable'
+require 'ar_jdbc_pg_array/querying'
+require 'ar_jdbc_pg_array/allways_save'
+require 'ar_jdbc_pg_array/references_by'
+require 'ar_jdbc_pg_array/schema_arel'
+require 'ar_jdbc_pg_array/querying_arel'
