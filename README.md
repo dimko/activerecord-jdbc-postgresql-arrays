@@ -1,4 +1,4 @@
-## ActiveRecord JDBC PostgreSQL Arrays
+## ActiveRecord JDBC PostgreSQL Arrays [![Build Status](https://travis-ci.org/dimko/activerecord-jdbc-postgresql-arrays.png?branch=master)](https://travis-ci.org/dimko/activerecord-jdbc-postgresql-arrays)
 
 This library adds ability to use PostgreSQL array types with ActiveRecord.
 
