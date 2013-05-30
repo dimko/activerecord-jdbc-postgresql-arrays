@@ -1,7 +1,7 @@
 # encoding: utf-8
 Gem::Specification.new do |gem|
   gem.name          = 'ar_jdbc_pg_array'
-  gem.version       = '0.1.0'
+  gem.version       = '0.1.1'
   gem.platform      = 'java'
 
   gem.authors       = ['Sokolov Yura', 'Dimko']
