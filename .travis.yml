@@ -2,3 +2,6 @@ language: ruby
 rvm:
   - jruby-18mode
   - jruby-19mode
+matrix:
+  allow_failures:
+    - rvm: jruby-18mode
