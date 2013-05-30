@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'activerecord', '~> 3.1'
   gem.add_dependency 'activerecord-jdbcpostgresql-adapter', '~> 1.2.9'
+  gem.add_dependency 'json'
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'cancan'
